@@ -1,0 +1,9 @@
+{
+  "name": "pipeline-test",
+  "version": "1.0.0",
+  "description": "Pipeline",
+  "main": "index.js",
+  "repository": "git@github.com:ranskills/pipeline-test.git",
+  "author": "Ransford Okpoti <ranskills@yahoo.co.uk>",
+  "license": "MIT"
+}
