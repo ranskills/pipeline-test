@@ -1,4 +1,4 @@
-FROM debian/bullseye-slim
+FROM debian:bullseye-slim
 
 WORKDIR /APP
 COPY ./src/pipeline-test .
