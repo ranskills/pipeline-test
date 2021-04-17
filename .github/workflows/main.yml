@@ -47,7 +47,7 @@ jobs:
           branch=`git branch --show-current`
           tag=$(echo $branch | tr / _)
           docker build --tag ranskills/pipeline-test:$tag .
-          docker login --username ${{ secrets.DOCKER_USERNAME}} --password ${{ secrets.DOCKER_PASSWORD }}
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_USERNAME}} --password-stdin
           docker push ranskills/pipeline-test:$tag
 
 
