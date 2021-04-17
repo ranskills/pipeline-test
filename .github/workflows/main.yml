@@ -44,9 +44,11 @@ jobs:
 
       - name: Build & Publish Docker Image
         run: |
-          docker build --tag ranskills/pipeline-test:latest .
+          branch=`git branch --show-current`
+          tag=$(echo $branch | tr / _)
+          docker build --tag ranskills/pipeline-test:$tag .
           docker login --username ${{ secrets.DOCKER_USERNAME}} --password ${{ secrets.DOCKER_PASSWORD }}
-          docker push ranskills/pipeline-test:latest
+          docker push ranskills/pipeline-test:$tag
 
 
         
