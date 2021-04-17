@@ -51,7 +51,8 @@ jobs:
           --header 'content-type: application/json' \
           --data '{
             "title": "Issue created due to workflow failure: ${{ github.run_id }}",
-            "body": "Automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n due to failure in _${{ github.run_id }}_."
+            "body": "Automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n due to failure in _${{ github.run_id }}_.",
+            "assignees": [ "ranskills" ]
           }'
 
       - name: List contents
