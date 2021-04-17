@@ -1,6 +1,6 @@
 FROM debian:bullseye-slim
 
 WORKDIR /APP
-COPY ./pipeline-test .
+COPY ./pipeline-test /pipeline-test
 
 CMD [ "/pipeline-test" ]
