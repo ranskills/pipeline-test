@@ -40,7 +40,7 @@ jobs:
         run: yarn compile && yarn build
 
       - name: Test
-        run: yarn test
+        run: yarn test:unit
 
       - name: Create Issue on Failing Test
         if: ${{ failure() }}
