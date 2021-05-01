@@ -37,7 +37,9 @@ jobs:
         run: yarn
 
       - name: Build binary
-        run: yarn compile && yarn build
+        run: |
+          yarn compile && yarn build
+          ls -lash
 
       - name: Test
         run: yarn test:unit
@@ -55,9 +57,6 @@ jobs:
             "assignees": [ "ranskills" ]
           }'
 
-      - name: List contents
-        run: ls -lash
-
       - name: Build & Publish Docker Image
         if: ${{ success() }}
         run: |
@@ -66,6 +65,4 @@ jobs:
           docker build --tag ranskills/pipeline-test:$tag .
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_USERNAME}} --password-stdin
           docker push ranskills/pipeline-test:$tag
-
-
         
