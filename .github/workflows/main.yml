@@ -96,6 +96,7 @@ jobs:
 
   release:
     name: Release
+    needs: test
     runs-on: ubuntu-latest
     steps:
       # - uses: actions/checkout@v2
