@@ -18,6 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     name: Build, Test, Publish Image
+    needs: test
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -78,3 +79,4 @@ jobs:
       - name: Unit Tests
         run: |
           echo Running unit tests
+          exit 1
