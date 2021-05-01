@@ -122,14 +122,11 @@ jobs:
           name: build-artifacts
           path: some-path
 
-      - name: Directory Listings
-        run: |
-          ls -lah
-          ls -lah some-path
-
       - name: Build Docker Image
-        if: ${{ success() }}
-        run: docker build --tag ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_IMAGE_TAG }} .
+        run: |
+          cd some-path
+          ls -lash
+          docker build --tag ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_IMAGE_TAG }} .
 
       - name: Publish Docker Image
         if: ${{ success() }}
