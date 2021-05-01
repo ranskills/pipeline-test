@@ -13,6 +13,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  DOCKER_IMAGE: ranskills/pipeline-test
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -61,9 +64,11 @@ jobs:
           name: build-artifacts
           path: |
             pipeline-test
+            Dockerfile
           retention-days: 5
 
   test:
+    name: Test
     runs-on: ubuntu-latest
     needs: build
     steps:
@@ -89,24 +94,35 @@ jobs:
           ls -lah
           ls -lah some-path
 
-  # release:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v2
-  #       with:
-  #         node-version: '14'
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      # - uses: actions/checkout@v2
+      # - uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '14'
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: build-artifacts
+          path: some-path
 
-  #     - name: Unit Tests
-  #       run: |
-  #         echo Running unit tests
-  #         exit 1
-        # - name: Build & Publish Docker Image
-        #   if: ${{ success() }}
-        #   run: |
-        #     branch=`git branch --show-current`
-        #     tag=$(echo $branch | tr / _)
-        #     docker build --tag ranskills/pipeline-test:$tag .
-        #     echo "${{ secrets.DOCKER_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_USERNAME}} --password-stdin
-        #     docker push ranskills/pipeline-test:$tag
+      - name: Directory Listings
+        run: |
+          ls -lah
+          ls -lah some-path
+
+      - name: Build Docker Image
+        if: ${{ success() }}
+        run: |
+          branch=`git branch --show-current`
+          tag=$(echo $branch | tr / _)
+          echo "DOCKER_IMAGE_TAG=$tag" >> $GITHUB_ENV
+          docker build --tag ${{ env.DOCKER_IMAGE }}:$tag .
+
+      - name: Publish Docker Image
+        if: ${{ success() }}
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_USERNAME}} --password-stdin
+          docker push ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}
