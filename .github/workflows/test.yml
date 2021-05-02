@@ -48,7 +48,8 @@ jobs:
         run: echo "PASSED_TEST_COUNT=$((${{ env.PASSED_TEST_COUNT }} + 1))" >> $GITHUB_ENV
 
       - name: Display value
-        run: echo ${{ env.PASSED_TEST_COUNT }} ${{ env.REQUIRED_TEST_COUNT }}
+        if: ${{ always() }}
+        run: echo ${{ env.REQUIRED_TEST_COUNT }} expected to pass, but only got ${{ env.PASSED_TEST_COUNT }} 
 
       - name: Build Binary
         if: ${{ env.PASSED_TEST_COUNT == env.REQUIRED_TEST_COUNT }}
