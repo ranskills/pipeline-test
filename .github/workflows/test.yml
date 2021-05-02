@@ -5,10 +5,10 @@ name: Test
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  # push:
-  #   branches: [ main ]
-  # pull_request:
-  #   branches: [ main ]
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -19,25 +19,39 @@ jobs:
   build:
     name: Running Tests
     runs-on: ubuntu-latest
+    env:
+      REQUIRED_TEST_COUNT: 2
+      PASSED_TEST_COUNT: 0
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: Install yarn package manager
-        run: npm install -g yarn
-
-      - name: Install dependencies
-        run: yarn
-
-      - name: Build binary
+      - name: Unit Tests
         run: |
-          yarn compile && yarn build
-          ls -lash
+          exit 0
 
-      - name: Test
-        run: yarn test:unit
+      - name: Update Tracker
+        if: ${{ success() }}
+        run: echo "PASSED_TEST_COUNT=$((${{ env.PASSED_TEST_COUNT }} + 1))" >> $GITHUB_ENV
+
+      - name: Display value
+        run: echo ${{ env.PASSED_TEST_COUNT }} ${{ env.REQUIRED_TEST_COUNT }}
+    # # Steps represent a sequence of tasks that will be executed as part of the job
+    # steps:
+    #   # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    #   - uses: actions/checkout@v2
+    #   - uses: actions/setup-node@v2
+    #     with:
+    #       node-version: '14'
+
+    #   - name: Install yarn package manager
+    #     run: npm install -g yarn
+
+    #   - name: Install dependencies
+    #     run: yarn
+
+    #   - name: Build binary
+    #     run: |
+    #       yarn compile && yarn build
+    #       ls -lash
+
+    #   - name: Test
+    #     run: yarn test:unit
