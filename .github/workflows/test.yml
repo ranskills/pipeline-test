@@ -51,7 +51,7 @@ jobs:
         run: echo ${{ env.PASSED_TEST_COUNT }} ${{ env.REQUIRED_TEST_COUNT }}
 
       - name: Build Binary
-        if: ${{ env.PASSED_TEST_COUNT == env.REQUIRED_TEST_COUNT }}
+        if: ${{ always() && env.PASSED_TEST_COUNT == env.REQUIRED_TEST_COUNT }}
         run: echo Safe to build binary
 
     # # Steps represent a sequence of tasks that will be executed as part of the job
