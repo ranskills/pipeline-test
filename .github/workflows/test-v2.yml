@@ -1,0 +1,55 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Test v2
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ feature/test-v2 ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  build:
+    name: Running Tests
+    runs-on: ubuntu-latest
+    env:
+      REQUIRED_TEST_COUNT: 3
+      PASSED_TEST_COUNT: 0
+
+    steps:
+      - name: Unit Tests
+        run: |
+          exit 0
+          exit 1
+          exit 0
+
+      - name: Build Binary
+        if: ${{ success() }}
+        run: echo Safe to build binary
+
+    # # Steps represent a sequence of tasks that will be executed as part of the job
+    # steps:
+    #   # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    #   - uses: actions/checkout@v2
+    #   - uses: actions/setup-node@v2
+    #     with:
+    #       node-version: '14'
+
+    #   - name: Install yarn package manager
+    #     run: npm install -g yarn
+
+    #   - name: Install dependencies
+    #     run: yarn
+
+    #   - name: Build binary
+    #     run: |
+    #       yarn compile && yarn build
+    #       ls -lash
+
+    #   - name: Test
+    #     run: yarn test:unit
