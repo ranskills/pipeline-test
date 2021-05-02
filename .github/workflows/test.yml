@@ -40,6 +40,7 @@ jobs:
         run: echo "PASSED_TEST_COUNT=$((${{ env.PASSED_TEST_COUNT }} + 1))" >> $GITHUB_ENV
 
       - name: Unit Tests - Package 3
+        if: ${{ always() }}
         run: exit 0
 
       - name: Update Tracker
