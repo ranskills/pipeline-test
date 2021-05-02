@@ -24,9 +24,16 @@ jobs:
       PASSED_TEST_COUNT: 0
 
     steps:
-      - name: Unit Tests
+      - name: Unit Tests - Package 1
         run: |
           exit 0
+
+      - name: Update Tracker
+        if: ${{ success() }}
+        run: echo "PASSED_TEST_COUNT=$((${{ env.PASSED_TEST_COUNT }} + 1))" >> $GITHUB_ENV
+
+      - name: Unit Tests - Package 2
+        run: exit 0
 
       - name: Update Tracker
         if: ${{ success() }}
