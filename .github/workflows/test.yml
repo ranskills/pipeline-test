@@ -20,7 +20,7 @@ jobs:
     name: Running Tests
     runs-on: ubuntu-latest
     env:
-      REQUIRED_TEST_COUNT: 2
+      REQUIRED_TEST_COUNT: 3
       PASSED_TEST_COUNT: 0
 
     steps:
@@ -34,6 +34,13 @@ jobs:
 
       - name: Unit Tests - Package 2
         run: exit 1
+
+      - name: Update Tracker
+        if: ${{ success() }}
+        run: echo "PASSED_TEST_COUNT=$((${{ env.PASSED_TEST_COUNT }} + 1))" >> $GITHUB_ENV
+
+      - name: Unit Tests - Package 3
+        run: exit 0
 
       - name: Update Tracker
         if: ${{ success() }}
