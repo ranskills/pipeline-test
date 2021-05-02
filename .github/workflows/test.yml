@@ -33,7 +33,7 @@ jobs:
         run: echo "PASSED_TEST_COUNT=$((${{ env.PASSED_TEST_COUNT }} + 1))" >> $GITHUB_ENV
 
       - name: Unit Tests - Package 2
-        run: exit 0
+        run: exit 1
 
       - name: Update Tracker
         if: ${{ success() }}
