@@ -7,6 +7,9 @@
   "author": "Ransford Okpoti <ranskills@yahoo.co.uk>",
   "license": "MIT",
   "bin": "src/index.js",
+  "pkg": {
+    "assets": [ "public/**/*"]
+  },
   "scripts": {
     "compile": "tsc --project .",
     "build": "yarn compile && npx pkg --targets node14 .",
