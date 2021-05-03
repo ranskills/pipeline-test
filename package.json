@@ -8,7 +8,9 @@
   "license": "MIT",
   "bin": "src/index.js",
   "pkg": {
-    "assets": [ "public/**/*"]
+    "assets": [
+      "public/**/*"
+    ]
   },
   "scripts": {
     "compile": "tsc --project .",
@@ -26,7 +28,7 @@
     "@types/tape": "^4.13.0",
     "faucet": "^0.0.1",
     "nodemon": "^2.0.7",
-    "pkg": "^4.5.1",
+    "pkg": "^5.1.0",
     "puppeteer": "^8.0.0",
     "tape": "^5.2.2",
     "ts-node": "^9.1.1",
