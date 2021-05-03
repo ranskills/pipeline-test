@@ -41,6 +41,7 @@ jobs:
       - name: Build binary
         run: |
           yarn compile && yarn build
+          chmod +x pipeline-test
           ls -lash
 
       - name: Test
