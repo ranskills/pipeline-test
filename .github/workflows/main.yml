@@ -104,7 +104,7 @@ jobs:
       - name: End-to-End (E2E) Tests
         run: |
           echo Running unit tests
-          yarn e2e
+          yarn test:e2e
           # exit 1 # Fail test
 
       - name: Set Docker Image Tag
