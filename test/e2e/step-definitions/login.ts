@@ -4,13 +4,13 @@ import { Page } from 'puppeteer';
 
 Given('a user is on the login page', async function () {
   // @ts-ignore
-  const page: Page = await this.gotoPage('http://example.com');
+  const page: Page = await this.gotoPage('http://localhost:3000');
 
   // let elem = await page.waitForSelector('h1');
   const text = await page.$eval('body > div > h1', (elem) => elem.textContent);
 
-  assert.strictEqual('Example Domain', text);
-  assert.strictEqual('Example Domain', await page.title());
+  assert.strictEqual('Hello, World!', text);
+  // assert.strictEqual('Example Domain', await page.title());
 });
 
 Given(
