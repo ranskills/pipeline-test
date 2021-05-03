@@ -10,7 +10,7 @@
   "scripts": {
     "compile": "tsc --project .",
     "build": "yarn compile && npx pkg --targets node14 .",
-    "start": "nodemon index.ts",
+    "start": "nodemon src/index.ts",
     "test": "echo \"Error: no test specified.\" && exit 1",
     "test:unit": "ts-node node_modules/.bin/tape 'test/**/*.test.ts' | faucet",
     "test:e2e": "cucumber-js --no-strict -p default"
@@ -22,6 +22,7 @@
     "@types/puppeteer": "^5.4.3",
     "@types/tape": "^4.13.0",
     "faucet": "^0.0.1",
+    "nodemon": "^2.0.7",
     "pkg": "^4.5.1",
     "puppeteer": "^8.0.0",
     "tape": "^5.2.2",
