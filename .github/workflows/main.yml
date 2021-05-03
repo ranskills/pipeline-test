@@ -6,9 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [ develop ]
   pull_request:
-    branches: [ main ]
+    branches: [ develop ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -32,7 +32,6 @@ jobs:
         with:
           node-version: '14'
 
-      # Runs a single command using the runners shell
       - name: Install yarn package manager
         run: npm install -g yarn
 
@@ -82,9 +81,28 @@ jobs:
         with:
           node-version: '14'
 
+      - name: Install yarn package manager
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.ARTIFACTS_NAME }}
+          path: ${{ env.ARTIFACTS_PATH }}
+
+      - name: Start server
+        run: |
+          cd ${{ env.ARTIFACTS_PATH }}
+          ls -lash
+          ./pipeline-test
+
       - name: End-to-End (E2E) Tests
         run: |
           echo Running unit tests
+          yarn e2e
           # exit 1 # Fail test
 
       - name: Set Docker Image Tag
@@ -94,18 +112,6 @@ jobs:
           tag=$(echo $branch | tr / _)
           echo "DOCKER_IMAGE_TAG=$tag" >> $GITHUB_ENV
           echo "::set-output name=DOCKER_IMAGE_TAG::$tag"
-
-
-      - name: Download Artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: ${{ env.ARTIFACTS_NAME }}
-          path: ${{ env.ARTIFACTS_PATH }}
-
-      - name: Directory Listings
-        run: |
-          ls -lah
-          ls -lah ${{ env.ARTIFACTS_PATH }}
 
   release:
     name: Release
