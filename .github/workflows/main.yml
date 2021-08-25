@@ -65,7 +65,7 @@ jobs:
       - name: Test
         run: yarn test:unit
 
-      - uses: ../actions/issue-creator@develop
+      - uses: ./actions/issue-creator
         if: ${{ failure() }}
         with:
           assignees: 'ranskills,theoadu'
