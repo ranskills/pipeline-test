@@ -69,7 +69,7 @@ jobs:
         run: |
           exit 1
 
-      - uses: ./actions/issue-creator
+      - uses: ./.github/actions/issue-creator
         if: ${{ failure() }}
         with:
           assignees: 'ranskills,theoadu'
