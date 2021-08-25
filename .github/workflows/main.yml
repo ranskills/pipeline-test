@@ -65,6 +65,10 @@ jobs:
       - name: Test
         run: yarn test:unit
 
+      - name: Simulate failed test
+        run: |
+          exit 1
+
       - uses: ./actions/issue-creator
         if: ${{ failure() }}
         with:
