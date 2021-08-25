@@ -67,6 +67,8 @@ jobs:
 
       - name: Simulate failed test
         run: |
+          ls -l .github
+          ls -l .github/actions/issue-creator
           exit 1
 
       - uses: ./../.github/actions/issue-creator
