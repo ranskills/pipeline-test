@@ -69,7 +69,7 @@ jobs:
         run: |
           exit 1
 
-      - uses: ranskills/pipeline-test/.github/actions/issue-creator@develop
+      - uses: ranskills/pipeline-test/.github/actions/issue-creator@
         if: ${{ failure() }}
         with:
           assignees: 'ranskills,theoadu'
