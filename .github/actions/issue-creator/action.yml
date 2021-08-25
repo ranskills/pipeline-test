@@ -5,6 +5,9 @@ inputs:
     description: 'A comma-separated list of assignees to the issue to be created'
     required: true
     # default: 'World'
+  GITHUB_TOKEN:
+    description: 'GitHub Token'
+    required: true
 outputs:
   time: # id of output
     description: 'The time we greeted you'

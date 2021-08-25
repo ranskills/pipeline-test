@@ -65,10 +65,11 @@ jobs:
       - name: Test
         run: yarn test:unit
 
-      - uses: ../actions/issue-creator
+      - uses: ../actions/issue-creator@develop
         if: ${{ failure() }}
         with:
           assignees: 'ranskills,theoadu'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Issue on Failing Test
         if: ${{ failure() }}
