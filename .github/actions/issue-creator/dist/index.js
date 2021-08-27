@@ -6329,6 +6329,8 @@ try {
         title: 'XXXX',
         body: 'YYYY',
         assignees
+    }).catch(error => {
+        console.debug(error)
     })
 
     // console.log(github.getOctokit())
