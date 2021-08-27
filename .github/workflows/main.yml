@@ -75,7 +75,7 @@ jobs:
       - uses: ranskills/pipeline-test/.github/actions/issue-creator@develop
         if: ${{ failure() }}
         with:
-          assignees: 'ranskills,theoadu'
+          assignees: ranskills
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Issue on Failing Test

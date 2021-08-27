@@ -6318,15 +6318,14 @@ const github = __nccwpck_require__(971)
 
 try {
     const GITHUB_TOKEN = core.getInput('GITHUB_TOKEN');
+    const assignees = core.getInput('assignees', 'ranskills').split(',')
 
     const octokit = github.getOctokit(GITHUB_TOKEN)
     const { context } = github
-    const assignees = core.getInput('assignees', 'ranskills').split(',')
 
-    console.log('Assignees', assignees)
-    console.log(context)
+    console.log(`URL: ${context.payload.repository.url}`)
     octokit.rest.issues.create({
-        repo: context.repo,
+        repo: context.payload.repository.url,
         title: 'XXXX',
         body: 'YYYY',
         assignees
