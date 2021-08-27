@@ -71,7 +71,8 @@ jobs:
           ls -l .github/actions/issue-creator
           exit 1
 
-      - uses: ./../.github/actions/issue-creator@v1.0-rc1
+      # - uses: ./../.github/actions/issue-creator@v1.0-rc1
+      - uses: ranskills/pipeline-test/.github/actions/issue-creator@v1.0-rc2
         if: ${{ failure() }}
         with:
           assignees: 'ranskills,theoadu'
