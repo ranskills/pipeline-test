@@ -104,6 +104,7 @@ dist
 .tern-port
 
 *.js
+!.github/actions/**/*.js
 pipeline-test
 
 !cucumber.js
