@@ -6317,31 +6317,23 @@ const core = __nccwpck_require__(46)
 const github = __nccwpck_require__(971)
 
 try {
-    const GITHUB_TOKEN = core.getInput('GITHUB_TOKEN');
+    const token = core.getInput('github-token');
     const assignees = core.getInput('assignees', { trimWhitespace: true }).split(',')
 
-    const octokit = github.getOctokit(GITHUB_TOKEN)
+    const octokit = github.getOctokit(token)
 
     const { context } = github
-    // const { repository } = context.payload
 
     core.info(`RunId: ${context.runId} RunNumber: ${context.runNumber} Workflow: ${context.workflow}`)
     octokit.rest.issues.create({
-        // repo: context.payload.repository.url,
         ...context.repo,
-        // repo: repository.name,
-        // owner: repository.owner.login,
         title: `Pipeline ${context.workflow} Failure: Run number #${context.runNumber}`,
-        body: `RunId: ${context.runId} RunNumber: ${context.runNumber} Workflow: ${context.workflow}`,
-        assignees
+        body: ``,
+        assignees,
     }).catch(error => {
         console.debug(error)
     })
 
-    // console.log(github.getOctokit())
-    // github.getOctokit().rest.issues.create({
-    //     assignees: assignees,
-    // })
 } catch (error) {
     core.setFailed(error.message)
 }

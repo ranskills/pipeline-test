@@ -1,16 +1,13 @@
 name: 'GitHub Issue Creator'
-description: 'Create GitHub Ticket'
+description: 'Create GitHub Issue'
 inputs:
-  assignees:  # id of input
-    description: 'A comma-separated list of assignees to the issue to be created'
+  assignees:
+    description: 'A comma-separated list of assignees to the created issue'
     required: true
-    # default: 'World'
-  GITHUB_TOKEN:
+    default: 'ranskills'
+  github-token:
     description: 'GitHub Token'
     required: true
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
 runs:
   using: 'node12'
   main: 'dist/index.js'
