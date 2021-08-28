@@ -9,6 +9,7 @@ try {
     const { context } = github
 
     console.log(`URL: ${context.payload.repository.url}`)
+    console.log(context.payload.repository.owner)
     octokit.rest.issues.create({
         // repo: context.payload.repository.url,
         repo: context.payload.repository.full_name,
