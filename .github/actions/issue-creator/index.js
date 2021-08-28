@@ -3,16 +3,18 @@ const github = require('@actions/github')
 
 try {
     const GITHUB_TOKEN = core.getInput('GITHUB_TOKEN');
-    const assignees = core.getInput('assignees', 'ranskills').split(',')
+    const assignees = core.getInput('assignees', { trimWhitespace: true }).split(',')
 
     const octokit = github.getOctokit(GITHUB_TOKEN)
     const { context } = github
 
     console.log(`URL: ${context.payload.repository.url}`)
     console.log(context.payload.repository.owner)
+    const { repository } = context.payload
     octokit.rest.issues.create({
         // repo: context.payload.repository.url,
-        repo: context.payload.repository.full_name,
+        repo: repository.name,
+        owner: repository.owner.login,
         title: 'XXXX',
         body: 'YYYY',
         assignees
