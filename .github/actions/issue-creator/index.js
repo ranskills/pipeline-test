@@ -16,7 +16,7 @@ try {
         ...context.repo,
         // repo: repository.name,
         // owner: repository.owner.login,
-        title: `Pipeline ${github.workflow} Failure`,
+        title: `Pipeline ${context.workflow} Failure: Run number #${context.runNumber}`,
         body: `RunId: ${context.runId} RunNumber: ${context.runNumber} Workflow: ${context.workflow}`,
         assignees
     }).catch(error => {
