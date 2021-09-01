@@ -3,7 +3,8 @@ const github = require('@actions/github')
 
 try {
     const token = core.getInput('github-token');
-    const assignees = core.getInput('assignees', { trimWhitespace: true }).split(',')
+    let assignees = core.getInput('assignees', { trimWhitespace: true }).split(',')
+    assignees = assignees.map(item => item.trim())
 
     const octokit = github.getOctokit(token)
 
@@ -16,7 +17,7 @@ try {
         body: ``,
         assignees,
     }).catch(error => {
-        console.debug(error)
+        core.error(error)
     })
 
 } catch (error) {
