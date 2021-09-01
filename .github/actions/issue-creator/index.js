@@ -14,7 +14,7 @@ try {
     octokit.rest.issues.create({
         ...context.repo,
         title: `Pipeline ${context.workflow} Failure: Run number #${context.runNumber}`,
-        body: `[Link](${context.payload.repository.url}/actions/runs/${context.runNumber})`,
+        body: `[Link](${context.payload.repository.url}/actions/runs/${context.runId})`,
         assignees,
     }).catch(error => {
         core.error(error)
