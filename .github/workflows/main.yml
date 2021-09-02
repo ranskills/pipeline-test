@@ -67,14 +67,14 @@ jobs:
       - name: Test
         run: yarn test:unit
 
-      - name: Pass test 1
-        run: exit 0
+      # - name: Pass test 1
+      #   run: exit 0
 
-      - name: Pass test 1
-        run: exit 1
+      # - name: Pass test 1
+      #   run: exit 1
 
-      - name: Pass test 1
-        run: exit 0
+      # - name: Pass test 1
+      #   run: exit 0
 
       - uses: ranskills/pipeline-test/.github/actions/issue-creator@develop
         if: ${{ failure() }}
@@ -105,7 +105,7 @@ jobs:
           retention-days: 1
 
   test:
-    name: Test
+    name: E2E Test
     runs-on: ubuntu-latest
     needs: build
     outputs:
@@ -167,7 +167,19 @@ jobs:
       - name: Build Docker Image
         run: |
           cd ${{ env.ARTIFACTS_PATH }}
-          docker build --tag ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_IMAGE_TAG }} .
+          docker build --tag ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_IMAGE_TAG }} \
+          --label git-sha=`git rev-parse HEAD` \
+          --label git-branch=${GITHUB_REF##*/} \
+          --label git-message="$(echo ${commitmsg} | sed 's/"//g')" \
+          --label git-timestamp='${{ github.event.head_commit.timestamp }}' \
+          --label git-author-name='${{ github.event.head_commit.author.name }}' \
+          --label git-author-email='${{ github.event.head_commit.author.email }}' \
+          --label git-committer-name='${{ github.event.head_commit.committer.name }}' \
+          --label git-committer-email='${{ github.event.head_commit.committer.email }}' \
+          --label build-hostname=`hostname` \
+          --label build-dir=`pwd` \
+          --label build-origin=github-actions \
+          .
 
       - name: Publish Docker Image
         if: ${{ success() }}
