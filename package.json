@@ -6,7 +6,7 @@
   "repository": "git@github.com:ranskills/pipeline-test.git",
   "author": "Ransford Okpoti <ranskills@yahoo.co.uk>",
   "license": "MIT",
-  "bin": "src/index.js",
+  "bin": "dist/src/index.js",
   "pkg": {
     "assets": [
       "public/**/*"
