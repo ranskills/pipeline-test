@@ -195,7 +195,7 @@ jobs:
     needs: e2e_test
     runs-on: ubuntu-latest
     env:
-      DOCKER_IMAGE_TAG: ${{ needs.test.outputs.DOCKER_IMAGE_TAG }}
+      DOCKER_IMAGE_TAG: ${{ needs.e2e_test.outputs.DOCKER_IMAGE_TAG }}
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v2
