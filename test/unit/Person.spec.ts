@@ -8,5 +8,8 @@ test('Person', function (t: Test) {
   person = new Person('James', 'Bond');
   t.equal(person.name, 'James Bond');
 
+  person = new Person('', 'James');
+  t.equal(person.name, 'James');
+
   t.end();
 });
