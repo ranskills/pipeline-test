@@ -1,0 +1,68 @@
+name: Coverage
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  transpile:
+    name: Transpile
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install yarn package manager
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Transpile Typescript to JavaScript
+        run: yarn compile
+
+  test:
+    name: Unit/Integration Tests
+    runs-on: ubuntu-latest
+    needs: transpile
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install yarn package manager
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Test
+        run: yarn test:coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          # directory: ./coverage/
+          # fail_ci_if_error: true
+          # files: ./lcov.info
+          # flags: unittests
+          # name: codecov-umbrella
+          # path_to_write_report: ./coverage/codecov_report.txt
+          verbose: true
+
+      # - uses: ranskills/pipeline-test/.github/actions/issue-creator@develop
+      #   if: ${{ failure() }}
+      #   with:
+      #     assignees: ${{ env.ISSUE_ASSIGNEES }}
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
