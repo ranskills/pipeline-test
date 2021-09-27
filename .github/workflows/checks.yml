@@ -1,13 +1,16 @@
-name: Coverage
+name: Checks
 
 on:
   pull_request:
     branches:
+      - main
       - develop
+      - feature/*
+      - bugfix/*
+      - hotfix/*
 
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   transpile:
     name: Transpile
@@ -34,7 +37,6 @@ jobs:
     needs: transpile
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
