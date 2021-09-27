@@ -61,7 +61,7 @@ jobs:
 
       - name: Test
         run: yarn test:coverage
-        
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
@@ -192,7 +192,7 @@ jobs:
 
   release:
     name: Release
-    needs: test
+    needs: e2e_test
     runs-on: ubuntu-latest
     env:
       DOCKER_IMAGE_TAG: ${{ needs.test.outputs.DOCKER_IMAGE_TAG }}
@@ -211,13 +211,6 @@ jobs:
           --label git-branch=${GITHUB_REF##*/} \
           --label git-message="$(echo ${commitmsg} | sed 's/"//g')" \
           --label git-timestamp='${{ github.event.head_commit.timestamp }}' \
-          --label git-author-name='${{ github.event.head_commit.author.name }}' \
-          --label git-author-email='${{ github.event.head_commit.author.email }}' \
-          --label git-committer-name='${{ github.event.head_commit.committer.name }}' \
-          --label git-committer-email='${{ github.event.head_commit.committer.email }}' \
-          --label build-hostname=`hostname` \
-          --label build-dir=`pwd` \
-          --label build-origin=github-actions \
           .
 
       - name: Publish Docker Image
