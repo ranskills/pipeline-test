@@ -8,11 +8,11 @@ on:
       - ci/input-params
 
   workflow_dispatch:
-    inputs:
-      e:
-        description: 'Environment'
-        default: 'development'
-        required: true
+    # inputs:
+    #   e:
+    #     description: 'Environment'
+    #     default: 'development'
+    #     required: true
 
 
 env:
