@@ -9,7 +9,7 @@ on:
 
   workflow_dispatch:
     inputs:
-      environment:
+      e:
         description: Environment
         default: development
         required: true
@@ -43,7 +43,12 @@ jobs:
         run: yarn compile
 
       - name: Display selected environment
-        run: echo $INPUT_ENVIRONMENT
+        run: echo $INPUT_E
+
+      - name: Display selected environment 2
+        run: |
+          echo "${{ env.INPUT_E }}"
+          echo ${{ env.INPUT_E }}
 
   test:
     name: Unit/Integration Tests
