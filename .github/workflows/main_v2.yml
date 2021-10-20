@@ -42,7 +42,9 @@ jobs:
       MONGODB_URI: ${{ secrets.MONGO_URI }}
     steps:
       - run: echo "${{ secrets.MONGO_URI }}"
-      - run: echo "${{ env.MONGODB_URI }}"
+      - run: |
+          echo "${{ env.MONGODB_URI }}" > hide.txt
+          cat hide.txt
     
   staging:
     if: ${{ github.event.inputs.environment == 'staging' }}
