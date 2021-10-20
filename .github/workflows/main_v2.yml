@@ -38,9 +38,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: development
     needs: transpile
-
+    env:
+      MONGODB_URI: ${{ secrets.MONGO_URI }}
     steps:
       - run: echo "${{ secrets.MONGO_URI }}"
+      - run: echo "${{ env.MONGODB_URI }}"
     
   staging:
     if: ${{ github.event.inputs.environment == 'staging' }}
