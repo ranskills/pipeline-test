@@ -37,4 +37,7 @@ jobs:
     name: Development
     runs-on: ubuntu-latest
     needs: transpile
+
+    steps:
+      - run: "echo Hello, World!"
     
