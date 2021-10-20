@@ -1,13 +1,12 @@
 name: CI/CD v2
 
 on:
-  push:
-    branches:
-      - develop
-      - ci/input-params
-
   workflow_dispatch:
-
+     inputs:
+       environment:
+         description: 'Environment'
+         default: 'development'
+         required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -29,3 +28,6 @@ jobs:
 
       # - name: Transpile Typescript to JavaScript
       #   run: yarn compile
+
+      - name: Transpile Typescript to JavaScript
+        run: echo "${{ github.event.inputs.environment }}"
