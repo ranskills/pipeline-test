@@ -1,0 +1,3 @@
+#@ load("@ytt:data", "data")
+---
+MONGODB_URI: #@ data.values.MONGODB_URI

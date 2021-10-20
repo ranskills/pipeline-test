@@ -40,7 +40,18 @@ jobs:
     needs: transpile
     env:
       MONGODB_URI: ${{ secrets.MONGO_URI }}
+
     steps:
+      - uses: vmware-tanzu/carvel-setup-action@v1
+        with:
+          only: ytt
+      - run: |
+          ytt version
+          ytt -f config/config.yml \
+            --data-value MONGODB_URI="${{ secrets.MONGO_URI }}" \
+            > new-config.yml
+          ls -la
+          cat new-config.yml
       - run: echo "${{ secrets.MONGO_URI }}"
       - run: |
           echo "${{ env.MONGODB_URI }}" > hide.txt
