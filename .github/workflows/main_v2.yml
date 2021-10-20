@@ -47,6 +47,7 @@ jobs:
           only: ytt
       - run: |
           ytt version
+          pwd
           ytt -f config/config.yml \
             --data-value MONGODB_URI="${{ secrets.MONGO_URI }}" \
             > new-config.yml
