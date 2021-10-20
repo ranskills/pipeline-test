@@ -31,3 +31,10 @@ jobs:
 
       - name: Transpile Typescript to JavaScript
         run: echo "${{ github.event.inputs.environment }}"
+
+  development:
+    if: ${{ github.event.inputs.environment == 'development' }}
+    name: Development
+    runs-on: ubuntu-latest
+    needs: transpile
+    
