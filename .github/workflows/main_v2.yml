@@ -36,15 +36,17 @@ jobs:
     if: ${{ github.event.inputs.environment == 'development' }}
     name: Development
     runs-on: ubuntu-latest
+    environment: development
     needs: transpile
 
     steps:
-      - run: "echo Hello, World!"
+      - run: echo "${{ secrets.MONGO_URI }}"
     
   staging:
     if: ${{ github.event.inputs.environment == 'staging' }}
     name: Staging
     runs-on: ubuntu-latest
+    environment: staging
     needs: transpile
 
     steps:
@@ -55,6 +57,7 @@ jobs:
     if: ${{ github.event.inputs.environment == 'production' }}
     name: Production
     runs-on: ubuntu-latest
+    environment: production
     needs: transpile
 
     steps:
