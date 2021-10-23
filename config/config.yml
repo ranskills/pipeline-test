@@ -1,3 +1,5 @@
 #@ load("@ytt:data", "data")
 ---
 MONGODB_URI: #@ data.values.MONGODB_URI
+AWS_COGNITO_KEYS: #@ data.values.AWS_COGNITO_KEYS
+LOGGING_LEVEL: Debug

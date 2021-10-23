@@ -110,6 +110,7 @@ jobs:
           ytt version
           ytt -f config/config.yml \
             --data-value MONGODB_URI="${{ secrets.MONGO_URI }}" \
+            --data-value AWS_COGNITO_KEYS="${{ secrets.AWS_COGNITO_KEYS }}" \
             > new-config.yml
           ls -la
           cat new-config.yml
