@@ -147,6 +147,6 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     needs: [ development, staging, production ]
-
+    if: ${{ always() }}
     steps:
-      - run: echo We are here finally
+      - run: echo ${{ needs.development.result }}
