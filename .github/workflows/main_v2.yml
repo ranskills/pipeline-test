@@ -4,8 +4,9 @@ on:
   workflow_dispatch:
      inputs:
        environment:
+         type: environment
          description: 'Environment'
-         default: 'development'
+        #  default: 'development'
          required: true
 
 env:
