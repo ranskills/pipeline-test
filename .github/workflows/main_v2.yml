@@ -6,7 +6,7 @@ on:
        environment:
          type: environment
          description: 'Environment'
-        #  default: 'development'
+         default: 'staging'
          required: true
 
 env:
