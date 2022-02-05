@@ -49,11 +49,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: XXX
+      - name: Generate .version file
         run: |
-          echo "${{github.event_name}}"
-          echo "${{github.ref_name}}"
-          echo "${{ github.event.action }}"
+          echo "Name: ${{github.event_name}}"
+          echo "Ref: ${{github.ref_name}}"
 
   build:
     name: Build
