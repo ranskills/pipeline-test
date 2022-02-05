@@ -9,6 +9,8 @@ on:
          default: 'development'
          required: true
   push:
+    branches:
+      - develop
     tags:
       - v**
 
