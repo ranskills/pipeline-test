@@ -55,6 +55,24 @@ jobs:
         run: |
           echo "Name: ${{github.event_name}}"
           echo "Ref: ${{github.ref_name}}"
+          echo `git branch --show-current`
+
+      - name: xxx
+        run: |
+          version=""
+          if [[ "${github.ref_name}"" == v* ]] ;
+          then
+            echo "We have a tag"
+            version=$branch+`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
+          else
+            echo "Good old branch"
+            branch=`git branch --show-current`
+            branch=${branch##*/}
+            echo $branch+`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD` > .version
+          fi
+
+          echo $version
+          cat $version > .version
 
   build:
     name: Build
