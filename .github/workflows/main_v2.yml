@@ -64,15 +64,18 @@ jobs:
           then
             echo "We have a tag"
             version=$branch+`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
+            version=${{github.ref_name}}
           else
             echo "Good old branch"
             branch=`git branch --show-current`
             branch=${branch##*/}
-            echo $branch+`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD` > .version
+            version=$branch+`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
+            version=$branch
           fi
 
-          echo $version
-          cat $version > .version
+          $version=$version+`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
+          echo $version > .version
+          cat .version
 
   build:
     name: Build
