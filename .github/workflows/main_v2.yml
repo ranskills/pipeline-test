@@ -60,7 +60,7 @@ jobs:
       - name: xxx
         run: |
           version=""
-          if [[ "${github.ref_name}"" == v* ]] ;
+          if [[ "${github.ref_name}" == v* ]] ;
           then
             echo "We have a tag"
             version=$branch+`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
