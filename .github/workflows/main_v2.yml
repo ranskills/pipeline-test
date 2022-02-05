@@ -51,7 +51,7 @@ jobs:
 
       - name: XXX
         run: |
-          echo "${{ github.event.name }}"
+          echo "$GITHUB_CONTEXT"
           echo "${{ github.event.action }}"
 
   build:
