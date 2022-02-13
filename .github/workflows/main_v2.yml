@@ -60,7 +60,7 @@ jobs:
       - name: Generate .version file
         run: |
           version=""
-          if [[ "${{github.ref_name}}" != v* ]]; then
+          if [[ "${{github.ref_name}}" == v* ]]; then
             version="${{github.ref_name}}"
           else
             # branch=`git branch --show-current`
@@ -69,7 +69,7 @@ jobs:
           fi
 
           buildMetadata=""
-          if [[ "$version" == *+* ]]; then
+          if [[ "$version" != *+* ]]; then
             buildMetadata=`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
           fi
 
