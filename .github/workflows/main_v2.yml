@@ -51,27 +51,28 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      # - name: Generate .version file
+      #   run: |
+      #     echo "Name: ${{github.event_name}}"
+      #     echo "Ref: ${{github.ref_name}}"
+      #     echo `git branch --show-current`
+
       - name: Generate .version file
         run: |
-          echo "Name: ${{github.event_name}}"
-          echo "Ref: ${{github.ref_name}}"
-          echo `git branch --show-current`
-
-      - name: xxx
-        run: |
           version=""
-          if [[ "${{github.ref_name}}" == v* ]]
-          then
-            echo "We have a tag"
+          if [[ "${{github.ref_name}}" == v* ]]; then
             version=${{github.ref_name}}
           else
-            echo "Good old branch"
             # branch=`git branch --show-current`
             branch=${{github.ref_name}}
             version=${branch##*/}
           fi
 
-          buildMetadata=`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
+          buildMetadata=""
+          if [[ "$version" == *+* ]]; then
+            buildMetadata=`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
+          fi
+
           version=$version+$buildMetadata
           echo $version > .version
           cat .version
@@ -101,15 +102,6 @@ jobs:
 
       - name: Test
         run: yarn test:unit
-
-      # - name: Pass test 1
-      #   run: exit 0
-
-      # - name: Pass test 1
-      #   run: exit 1
-
-      # - name: Pass test 1
-      #   run: exit 0
 
       - uses: ranskills/pipeline-test/.github/actions/issue-creator@develop
         if: ${{ failure() }}
