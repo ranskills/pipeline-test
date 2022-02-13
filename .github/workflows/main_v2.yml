@@ -60,11 +60,11 @@ jobs:
       - name: Generate .version file
         run: |
           version=""
-          if [[ "${{github.ref_name}}" == v* ]]; then
-            version=${{github.ref_name}}
+          if [[ "${{github.ref_name}}" != v* ]]; then
+            version="${{github.ref_name}}""
           else
             # branch=`git branch --show-current`
-            branch=${{github.ref_name}}
+            branch="${{github.ref_name}}""
             version=${branch##*/}
           fi
 
