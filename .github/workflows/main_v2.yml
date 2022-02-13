@@ -70,10 +70,10 @@ jobs:
 
           buildMetadata=""
           if [[ "$version" != *+* ]]; then
-            buildMetadata=`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
+            buildMetadata=+`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
           fi
 
-          version=$version+$buildMetadata
+          version+="$buildMetadata"
           echo $version > .version
           cat .version
 
