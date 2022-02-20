@@ -1,13 +1,9 @@
-name: Auto-Builder
+name: Scheduled Tag Creation
 
 on:
   schedule:
     # Refer to https://crontab.guru/
     - cron: '*/5 * * * 6,0'
-
-defaults:
-  run:
-    shell: bash
 
 jobs:
   create-tag:
@@ -55,6 +51,10 @@ jobs:
       - name: Create Dynamic Tag
         run: |
           buildMetadata=`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
-          git tag -a vlatest+${buildMetadata} -m 'Version latest+${buildMetadata}'
-          git push -u origin vlatest+${buildMetadata}
-#          git push --delete origin ${{ steps.day-label.outputs.day-in-words}}
+          tag=latest+${buildMetadata}
+          if [ $(git tag -l "$tag") ]; then
+            git push --delete origin ${tag}
+          fi
+
+          git tag -a v${tag} -m 'Version ${tag}'
+          git push -u origin v${tag}
