@@ -5,6 +5,10 @@ on:
     # Refer to https://crontab.guru/
     - cron: '*/5 * * * 6,0'
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   create-tag:
     name: Create Tag
@@ -36,7 +40,7 @@ jobs:
           echo "Current shell: $SHELL"
 
           days=(monday tuesday wednesday thursday friday saturday sunday)
-          words=$days[$dayOfWeek]
+          words=${days[$dayOfWeek - 1]}
           echo "::set-output name=day-in-words::$words"
 
       - name: Create Fix Tag
