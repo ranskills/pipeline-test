@@ -16,10 +16,10 @@ jobs:
 
       - name: Setup Git Config
         run: |
-          git config user.email '<>'
           git config user.name 'GitHub Actions Bot'
+          git config user.email '<>'
 
       - name: Create 
         run: |
-          git tag -a vlatest+build
+          git tag -a vlatest+build -m 'Version latest+build'
           git push -u origin vlatest+build
