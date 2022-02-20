@@ -33,6 +33,7 @@ jobs:
           esac)
 
           echo "Day ${day}"
+          echo "Current shell: $SHELL"
 
           days=(monday tuesday wednesday thursday friday saturday sunday)
           words=$days[$dayOfWeek]
