@@ -2,7 +2,7 @@ name: Auto-Builder
 
 on:
   schedule:
-    - cron: '*/2 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   create-tag:
