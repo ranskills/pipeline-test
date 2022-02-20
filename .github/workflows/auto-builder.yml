@@ -38,12 +38,14 @@ jobs:
           words=${days[$dayOfWeek - 1]}
           echo "::set-output name=day-in-words::$words"
 
+      - name: List tags
+        run: git tag --list
+
       - name: Create Fix Tag
         run: |
-          git tag --list
           tag=${{ steps.day-label.outputs.day-in-words}}
           if [ $(git tag --list "v$tag") ]; then
-            git push --delete origin ${tag}
+            git push --delete origin $v{tag}
           fi
 
           git tag -a v${tag} -m 'Version ${tag}'
@@ -54,7 +56,7 @@ jobs:
           buildMetadata=`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
           tag=latest+${buildMetadata}
           if [ $(git tag --list "v$tag") ]; then
-            git push --delete origin ${tag}
+            git push --delete origin v${tag}
           fi
 
           git tag -a v${tag} -m 'Version ${tag}'
