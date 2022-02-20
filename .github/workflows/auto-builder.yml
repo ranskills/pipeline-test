@@ -35,7 +35,8 @@ jobs:
           echo "Day ${day}"
 
           days=(monday tuesday wednesday thursday friday saturday sunday)
-          echo "::set-output name=day-in-words::$days[$dayOfWeek]"
+          words=$days[$dayOfWeek]
+          echo "::set-output name=day-in-words::$words"
 
       - name: Create Fix Tag
         run: |
