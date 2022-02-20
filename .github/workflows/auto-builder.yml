@@ -15,10 +15,12 @@ jobs:
           ref: develop
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
-      # - name: Setup Git Config
-      #   run: |
-      #     git config user.name 'GitHub Actions Bot'
-      #     git config user.email '<>'
+      - name: Setup Git Config
+        run: |
+          # git config user.name 'GitHub Actions Bot'
+          # git config user.email '<>'
+          git config user.name github-actions
+          git config user.email github-actions@github.com
 
       - name: Create 
         run: |
