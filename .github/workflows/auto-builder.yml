@@ -2,7 +2,9 @@ name: Auto-Builder
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    # Refer to https://crontab.guru/
+    - cron: '*/5 * * * 6'
+    - cron: '*/5 * * * 7'
 
 jobs:
   create-tag:
@@ -22,6 +24,7 @@ jobs:
 
 
       - name: Name
+        id: day-label
         run: |
           dayOfWeek=$(date +%u)
           day=$(case $dayOfWeek in
@@ -32,8 +35,20 @@ jobs:
 
           echo "Day ${day}"
 
-      - name: Create 
+          days=(monday tuesday wednesday thursday friday saturday sunday)
+          echo $days[dayOfWeek]
+          echo "::set-output name=day-in-words::$($days[dayOfWeek])"
+
+      - name: Create Fix Tag
+        run: |
+          tag=${{ steps.day-label.outputs.day-in-words}}
+          git tag -a v${tag} -m 'Version ${tag}'
+          git push --delete origin ${tag}
+          git push origin v${tag}
+
+      - name: Create Dynamic Tag
         run: |
           buildMetadata=`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
           git tag -a vlatest+${buildMetadata} -m 'Version latest+${buildMetadata}'
           git push -u origin vlatest+${buildMetadata}
+#          git push --delete origin ${{ steps.day-label.outputs.day-in-words}}
