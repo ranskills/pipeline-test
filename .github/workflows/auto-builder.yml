@@ -1,0 +1,23 @@
+name: Auto-Builder
+
+on:
+  schedule:
+    - cron: "*/2 * * * *"
+
+jobs:
+  create-tag:
+    name: Create Tag
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: develop
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Create 
+        run: |
+          git tag -a vlatest+build
+          git push -u origin vlatest+build
