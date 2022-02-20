@@ -45,8 +45,8 @@ jobs:
       - name: Create Fix Tag
         run: |
           tag=${{ steps.day-label.outputs.day-in-words}}
-          if [ $(git tag --list "v$tag") ]; then
-            git push --delete origin $v{tag}
+          if [ $(git tag --list "v${tag}") ]; then
+            git push --delete origin v${tag}
           fi
 
           git tag -a v${tag} -m 'Version ${tag}'
