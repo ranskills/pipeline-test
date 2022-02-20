@@ -37,7 +37,6 @@ jobs:
           esac)
 
           echo "Day ${day}"
-          echo "Current shell: $SHELL"
 
           days=(monday tuesday wednesday thursday friday saturday sunday)
           words=${days[$dayOfWeek - 1]}
@@ -46,8 +45,11 @@ jobs:
       - name: Create Fix Tag
         run: |
           tag=${{ steps.day-label.outputs.day-in-words}}
+          if [ $(git tag -l "$tag") ]; then
+            git push --delete origin ${tag}
+          fi
+
           git tag -a v${tag} -m 'Version ${tag}'
-          git push --delete origin ${tag}
           git push origin v${tag}
 
       - name: Create Dynamic Tag
