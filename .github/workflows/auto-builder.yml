@@ -40,8 +40,9 @@ jobs:
 
       - name: Create Fix Tag
         run: |
+          git tag --list
           tag=${{ steps.day-label.outputs.day-in-words}}
-          if [ $(git tag -l "$tag") ]; then
+          if [ $(git tag --list "$tag") ]; then
             git push --delete origin ${tag}
           fi
 
@@ -52,7 +53,7 @@ jobs:
         run: |
           buildMetadata=`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
           tag=latest+${buildMetadata}
-          if [ $(git tag -l "$tag") ]; then
+          if [ $(git tag --list "$tag") ]; then
             git push --delete origin ${tag}
           fi
 
