@@ -21,5 +21,6 @@ jobs:
 
       - name: Create 
         run: |
-          git tag -a vlatest+build -m 'Version latest+build'
-          git push -u origin vlatest+build
+          buildMetadata=`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
+          git tag -a vlatest+${buildMetadata} -m 'Version latest+${buildMetadata}'
+          git push -u origin vlatest+${buildMetadata}
