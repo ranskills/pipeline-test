@@ -3,7 +3,7 @@ name: Scheduled Tag Creation
 on:
   schedule:
     # Refer to https://crontab.guru/
-    - cron: '*/5 * * * 6,0'
+    - cron: '* 12 * * 6,0'
 
 jobs:
   create-tag:
