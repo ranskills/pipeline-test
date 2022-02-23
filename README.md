@@ -11,5 +11,3 @@ Typescript Node Pkg Docker
 ## Load Testing K6
 
     k6 run ~/dev/workbench/devops/k6/index.js
-
-TODO
