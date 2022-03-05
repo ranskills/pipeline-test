@@ -55,7 +55,7 @@ jobs:
         run: |
           buildMetadata=`date '+%Y%m%d'`.sha.`git rev-parse --short HEAD`
           tag=latest+${buildMetadata}
-          if [ $(git tag --list "v$tag") ]; then
+          if [ $(git tag --list "v{$tag}") ]; then
             git push --delete origin "v${tag}"
           fi
 
