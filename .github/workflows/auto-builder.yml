@@ -4,6 +4,7 @@ on:
   schedule:
     # Refer to https://crontab.guru/
     - cron: '* 12 * * 6,0'
+  workflow_dispatch:
 
 jobs:
   create-tag:
