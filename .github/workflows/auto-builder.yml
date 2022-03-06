@@ -60,5 +60,5 @@ jobs:
             git push --delete origin "v${tag}"
           fi
 
-          git tag -a "v${tag}" -m "Version ${tag}"
+          git tag -f -a "v${tag}" -m "Version ${tag}"
           git push -u origin "v${tag}"
