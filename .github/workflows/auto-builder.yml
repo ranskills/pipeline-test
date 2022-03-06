@@ -61,4 +61,4 @@ jobs:
           fi
 
           git tag -f -a "v${tag}" -m "Version ${tag}"
-          git push -u origin "v${tag}"
+          git push origin "v${tag}"
