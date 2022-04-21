@@ -14,7 +14,7 @@
   },
   "scripts": {
     "compile": "tsc --project .",
-    "build": "yarn compile && npx pkg --targets node14 .",
+    "build": "yarn compile && npx pkg --targets node16 .",
     "start": "nodemon src/index.ts",
     "start:dev": "nodemon dist/src/index.js",
     "test": "echo \"Error: no test specified.\" && exit 1",
