@@ -220,6 +220,6 @@ jobs:
       - name: Publish Docker Image
         if: ${{ success() }}
         run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_USERNAME}} --password-stdin
+          echo "${{ secrets.DOCKER_ACCESS_TOKEN }}" | docker login --username ${{ secrets.DOCKER_USERNAME}} --password-stdin
           docker push ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}
           docker push ${{ env.DOCKER_IMAGE }}:latest
