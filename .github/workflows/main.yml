@@ -203,6 +203,9 @@ jobs:
           name: ${{ env.ARTIFACTS_NAME }}
           path: ${{ env.ARTIFACTS_PATH }}
 
+      - name: Docker Version
+        run: docker version
+
       - name: Build Docker Image
         run: |
           cd ${{ env.ARTIFACTS_PATH }}
@@ -219,3 +222,4 @@ jobs:
         run: |
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login --username ${{ secrets.DOCKER_USERNAME}} --password-stdin
           docker push ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_IMAGE_TAG }}
+          docker push ${{ env.DOCKER_IMAGE }}:latest
