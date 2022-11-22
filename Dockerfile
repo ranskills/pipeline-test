@@ -1,6 +1,6 @@
 FROM debian:bullseye-slim
 
-WORKDIR /APP
+WORKDIR /app
 COPY ./pipeline-test /pipeline-test
 
-ENTRYPOINT [ "/pipeline-test" ]
+ENTRYPOINT [ "/app/pipeline-test" ]

@@ -28,9 +28,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '16'
+          cache: 'yarn'
 
       - name: Install yarn package manager
         run: npm install -g yarn
@@ -49,9 +50,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '16'
+          cache: 'yarn'
 
       - name: Install yarn package manager
         run: npm install -g yarn
@@ -88,9 +90,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '16'
+          cache: 'yarn'
 
       - name: Install yarn package manager
         run: npm install -g yarn
@@ -209,6 +212,8 @@ jobs:
       - name: Build Docker Image
         run: |
           cd ${{ env.ARTIFACTS_PATH }}
+          chmod +x pipeline-test
+
           docker build --tag ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_IMAGE_TAG }} \
           --tag  ${{ env.DOCKER_IMAGE }}:latest \
           --label git-sha=`git rev-parse HEAD` \
