@@ -179,6 +179,6 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    needs: [development, staging, production]
+    needs: build
     steps:
       - run: echo ${{ needs.development.result }}
