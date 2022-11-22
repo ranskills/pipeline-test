@@ -18,15 +18,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '16'
+          cache: 'yarn'
+
+      - name: Check if yarn already exists
+        run: yarn --version
 
       - name: Install yarn package manager
         run: npm install -g yarn
 
       - name: Install dependencies
-        run: yarn
+        run: yarn install --frozen-lockfile
 
       - name: Transpile Typescript to JavaScript
         run: yarn compile
@@ -38,15 +42,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '16'
+          cache: 'yarn'
 
       - name: Install yarn package manager
         run: npm install -g yarn
 
       - name: Install dependencies
-        run: yarn
+        run: yarn install --frozen-lockfile
 
       - name: Test
         run: yarn test:coverage
