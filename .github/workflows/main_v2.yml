@@ -112,7 +112,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ env.ARTIFACTS_NAME }}
           path: |
@@ -130,7 +130,7 @@ jobs:
       MONGODB_URI: ${{ secrets.MONGO_URI }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
@@ -149,7 +149,7 @@ jobs:
           cat new-config.yml
       - run: cat new-config.yml
       - name: Upload Configuration File
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ env.ARTIFACTS_NAME }}
           path: |
