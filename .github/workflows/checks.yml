@@ -17,11 +17,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
           cache: 'yarn'
+
+      - name: Docker version
+        run: docker version
 
       - name: Check if yarn already exists
         run: yarn --version
